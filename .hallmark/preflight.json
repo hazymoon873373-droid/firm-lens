@@ -1,0 +1,7 @@
+{
+  "scanned": "2026-11-07",
+  "findings": { "fonts": "No pre-existing system", "palette": "No pre-existing system", "motion": "None", "spacing": "None", "framework": "Empty directory, static HTML selected for GitHub Pages" },
+  "preserve": ["User-supplied financial source provenance", "Vietnamese content"],
+  "introduce": ["Terrazzo app palette", "System sans for Vietnamese", "Evidence-linked financial ledger", "Accessible responsive navigation"],
+  "scope": "app"
+}

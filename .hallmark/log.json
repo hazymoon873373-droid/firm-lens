@@ -1,0 +1,28 @@
+[
+ {
+  "shape": "app screen",
+  "theme": "terrazzo",
+  "axes": "light/geometric-sans/warm",
+  "hero": "financial overview",
+  "nav": "top document navigation",
+  "footer": "compact source and share row",
+  "imagery": "real financial chart",
+  "photos": [],
+  "entry": "data explorer",
+  "fingerprint": "firm-lens-ledger",
+  "sections": [
+   "overview",
+   "data",
+   "method",
+   "proposal"
+  ],
+  "signature": "evidence-linked financial ledger",
+  "waived": [
+   "system fonts for Vietnamese"
+  ],
+  "prompt": "Vietnamese basic financial-health idea demo with curated data and GitHub sharing",
+  "scope": "app",
+  "date": "2026-11-07",
+  "mode": "build"
+ }
+]
