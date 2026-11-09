@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "verifiedAt": "2026-11-09T01:23:51.023Z",
+  "error": "Inference failed: {\"code\":\"INFERENCE_TIMEOUT\",\"message\":\"Quá thời hạn suy luận 270 giây trên CPU trình duyệt. Đã dừng worker để giải phóng tài nguyên.\"}\n+ actual - expected\n\n+ {\n+   code: 'INFERENCE_TIMEOUT',\n+   message: 'Quá thời hạn suy luận 270 giây trên CPU trình duyệt. Đã dừng worker để giải phóng tài nguyên.'\n+ }\n- null\n",
+  "state": {
+    "modelLoaded": false,
+    "active": false,
+    "task": null,
+    "error": {
+      "code": "INFERENCE_TIMEOUT",
+      "message": "Quá thời hạn suy luận 270 giây trên CPU trình duyệt. Đã dừng worker để giải phóng tài nguyên."
+    },
+    "progress": {
+      "total": 457,
+      "cache": 0,
+      "processed": 128,
+      "time_ms": 152633,
+      "elapsedMs": 218289
+    },
+    "tokens": 0,
+    "visibility": "visible"
+  }
+}

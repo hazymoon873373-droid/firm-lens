@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e9">
+  <meta name="description" content="Không gian thử nghiệm đọc báo cáo PDF có lớp chữ, đối chiếu mẫu trích chọn VNM/DGC và hỏi đáp Qwen2.5-1.5B-Instruct cục bộ trên trình duyệt.">
+  <title>FirmLens | Phân tích tài liệu &amp; đối chiếu nguồn (AI cục bộ)</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="../../index.html#tong-quan"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 22V6h18M5 14h13M12 22v-8M21 22V11"/></svg>FirmLens</a>
+      <span class="header-meta" id="runtime-env">Tài liệu xử lý cục bộ / Không gửi lên máy chủ</span>
+      <a class="button button-quiet" id="back-to-ledger" href="../../index.html#tong-quan">Về sổ cái chính</a>
+    </div>
+    <nav class="container lab-nav" aria-label="Điều hướng phân tích"><a href="../../index.html#tong-quan">Tổng quan tài chính</a><a href="../../index.html#du-lieu">Dữ liệu &amp; nguồn</a><a href="./index.html" aria-current="page">Không gian AI <span>Thử nghiệm</span></a></nav>
+  </header>
+
+  <main id="main" class="container" tabindex="-1">
+    <section class="lab-intro">
+      <div><h1>Từ câu hỏi<br>đến bằng chứng.</h1><p>Tra cứu tài liệu, đối chiếu nguồn và hỏi AI ngay trên máy.</p></div><div class="lab-intro-note"><strong>Bạn kiểm soát tài liệu.</strong><p>Dùng trích lục mẫu hoặc PDF có lớp chữ. Tra cứu không cần AI; Qwen2.5-1.5B chỉ tải khi bạn chọn nạp.</p><span>Không gian thử nghiệm. Chưa có mô hình dự báo được kiểm định.</span></div>
+    </section>
+
+    <div id="error-banner" class="error-banner" role="alert" hidden></div>
+
+    <div class="lab-grid">
+      <div class="lab-column">
+        <section class="panel" aria-labelledby="heading-source">
+          <div class="panel-header">
+            <h2 id="heading-source">01. Nguồn tài liệu</h2>
+            <span class="panel-meta">Mẫu biên soạn hoặc PDF ≤ 50 MB, ≤ 250 trang</span>
+          </div>
+          <div class="panel-body">
+            <div class="source-group">
+              <span class="field-title">Chọn trích lục biên soạn sẵn</span>
+              <div class="sample-switch" role="group" aria-label="Chọn doanh nghiệp mẫu có sẵn">
+                <button type="button" class="sample-choice" id="sample-vnm" data-sample="VNM" aria-pressed="false">
+                  <strong>VNM</strong><span>Vinamilk<small>IFRS hợp nhất</small></span>
+                </button>
+                <button type="button" class="sample-choice" id="sample-dgc" data-sample="DGC" aria-pressed="false">
+                  <strong>DGC</strong><span>Đức Giang<small>Bản lịch sử 04/2026</small></span>
+                </button>
+              </div>
+            </div>
+
+            <div id="sample-provenance" class="provenance-box" hidden></div>
+
+            <div class="upload-divider">
+              <label for="pdf-input">
+                Hoặc chọn PDF báo cáo năm có lớp văn bản <span class="upload-help">Tối đa 50 MB, 250 trang. Xử lý cục bộ; chưa hỗ trợ OCR ảnh scan.</span>
+                <span class="file-trigger">Chọn tệp PDF<input type="file" id="pdf-input" accept="application/pdf,.pdf" aria-label="Chọn tệp báo cáo PDF"></span>
+              </label>
+            </div>
+
+            <div class="status-box" id="pdf-status" role="status" aria-live="polite">
+              Chưa chọn nguồn tài liệu. Hãy chọn mẫu VNM / DGC ở trên hoặc tải tệp PDF có lớp văn bản để bắt đầu tra cứu đoạn trích.
+            </div>
+
+            <div class="action-row">
+              <button type="button" class="button button-quiet" id="reset-pdf" disabled>Đặt lại nguồn tài liệu</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="heading-model">
+          <div class="panel-header">
+            <h2 id="heading-model">02. Mô hình cục bộ</h2>
+            <span class="panel-meta" id="model-manifest-meta">Tùy chọn: Qwen2.5-1.5B / 1.12 GB / CPU 1 luồng</span>
+          </div>
+          <div class="panel-body">
+            <div class="limitation-note" id="model-limitation-note">
+              <strong>Lưu ý trung thực trước khi nạp mô hình:</strong>
+              <ul>
+                <li>Trang <strong>không tự động tải</strong> mô hình khi mở. Bạn có thể tra cứu đoạn trích nguồn ở bước 3 mà không cần nạp AI.</li>
+                <li>Lần đầu bấm nạp sẽ tải <strong>1.12 GB</strong> từ Hugging Face vào bộ nhớ đệm trình duyệt; cần còn trống tối thiểu <strong>trên 2 GB</strong> RAM/lưu trữ tạm.</li>
+                <li>Suy luận chạy trên <strong>CPU WebAssembly 1 luồng</strong>, có thể mất vài phút/câu; tự động ngắt ở <strong>270 giây</strong> nếu quá hạn. Thời gian tùy thiết bị và độ dài ngữ cảnh.</li>
+                <li><strong>Không phải mọi điện thoại hay trình duyệt di động đều hỗ trợ</strong> nạp mô hình 1.12 GB; khuyến nghị dùng máy tính để bàn/laptop.</li>
+              </ul>
+            </div>
+
+            <div class="progress-block">
+              <label for="model-progress" class="progress-label" id="model-progress-label">
+                <span>Tiến độ nạp mô hình vào trình duyệt</span>
+                <span class="num" id="model-progress-text">0%</span>
+              </label>
+              <progress id="model-progress" class="model-progress" max="100" value="0">0%</progress>
+            </div>
+
+            <div class="status-box" id="model-status" role="status" aria-live="polite">
+              Chưa nạp mô hình AI. Bấm “Nạp mô hình AI” khi bạn muốn tổng hợp câu trả lời bằng Qwen2.5-1.5B.
+            </div>
+
+            <div class="action-row">
+              <button type="button" class="button" id="load-model">Nạp mô hình AI (1.12 GB)</button>
+              <button type="button" class="button button-quiet" id="cancel-action" disabled>Hủy tác vụ</button>
+              <button type="button" class="button button-quiet" id="retry-action" hidden>Thử lại</button>
+              <button type="button" class="button button-quiet" id="clear-cache">Xóa bộ nhớ đệm</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="lab-column">
+        <section class="panel" aria-labelledby="heading-qa">
+          <div class="panel-header">
+            <h2 id="heading-qa">03. Tra cứu &amp; hỏi đáp</h2>
+            <span class="panel-meta" id="qa-meta">Đối chiếu năm, chuẩn và phạm vi báo cáo</span>
+          </div>
+          <div class="panel-body">
+            <label for="question-input">
+              Bạn muốn tìm hiểu điều gì?
+              <textarea id="question-input" placeholder="Ví dụ: Doanh thu và lợi nhuận thuần năm 2025 theo báo cáo hợp nhất IFRS là bao nhiêu?">Doanh thu và lợi nhuận thuần năm 2025 theo báo cáo kết quả hoạt động kinh doanh hợp nhất IFRS là bao nhiêu?</textarea>
+            </label>
+
+            <p class="caption">Ghi rõ năm, hỏi ngắn về 1–2 chỉ tiêu cùng bảng trong tài liệu đang mở. Với nhiều nhóm báo cáo, hãy hỏi từng nhóm; tra cứu nguồn vẫn dùng được khi AI từ chối ngữ cảnh quá dài.</p>
+            <div class="action-row">
+              <button type="button" class="button" id="preview-retrieval" disabled>Tìm đoạn trích nguồn</button>
+              <button type="button" class="button button-quiet" id="ask-button" disabled>Hỏi mô hình AI cục bộ</button>
+            </div>
+
+            <div class="evidence-section">
+              <div class="subsection-header">
+                <h3>Bằng chứng trong tài liệu</h3>
+                <span class="caption-inline" id="evidence-hint">Hoạt động ngay cả khi chưa nạp mô hình AI</span>
+              </div>
+              <ul class="chunk-list" id="retrieved-chunks" aria-live="polite">
+                <li class="chunk-item">Chưa có đoạn trích. Hãy chọn mẫu VNM / DGC hoặc tải tệp PDF ở bước 1.</li>
+              </ul>
+            </div>
+
+            <div class="answer-section">
+              <div class="subsection-header">
+                <h3>Câu trả lời từ AI cục bộ</h3>
+                <span class="caption-inline">Từ chối hiển thị nếu thiếu nhãn trang hợp lệ</span>
+              </div>
+              <div id="provisional-banner" class="provisional-banner" role="status" aria-live="polite" hidden>
+                Bản nháp đang sinh trực tuyến (chưa kiểm chứng nhãn nguồn); hệ thống sẽ tự động xóa nếu kết quả cuối không có trích dẫn trang hợp lệ.
+              </div>
+              <div class="answer-sheet" id="ai-answer">Câu trả lời của AI sẽ hiển thị tại đây sau khi bạn nạp mô hình (bước 2) và bấm “Hỏi mô hình AI cục bộ”.</div>
+              <div class="citation-list" id="answer-citations" aria-label="Nhãn trang trích dẫn trong câu trả lời"></div>
+              <p class="citation-note" id="citation-feedback" role="status" aria-live="polite">
+                Nhãn nguồn chỉ xác nhận trang thuộc ngữ cảnh đã truy xuất, không tự chứng minh độ chính xác số học; bấm vào nhãn trang để cuộn tới và đối chiếu nguyên văn đoạn trích.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <details class="diagnostics-details" id="diagnostics-details">
+      <summary>Thông tin vận hành và chẩn đoán kỹ thuật</summary>
+      <div class="diagnostics-grid" aria-label="Thông số vận hành thực tế">
+        <div class="telemetry-item">
+          <span class="telemetry-label">Cô lập chéo (COOP/COEP)</span>
+          <span class="telemetry-value num" id="metric-isolation">Đang kiểm tra…</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Bộ nhớ đệm GGUF</span>
+          <span class="telemetry-value num" id="metric-cache">Chưa kiểm tra</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Thời gian nạp mô hình</span>
+          <span class="telemetry-value num" id="metric-load-ms">Chưa đo</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Thời gian trích xuất / suy luận</span>
+          <span class="telemetry-value num" id="metric-infer-ms">Chưa đo</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Ngân sách token GGUF BPE</span>
+          <span class="telemetry-value num" id="metric-tokens">Chưa tính (tối đa 1024)</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Phiên tài liệu (docRevision)</span>
+          <span class="telemetry-value num" id="metric-revision">0</span>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <footer class="container lab-footer"><a href="../../index.html#phuong-phap">Đọc phương pháp và giới hạn</a><p>Câu trả lời của AI cần được đối chiếu với tài liệu gốc. Không phải khuyến nghị đầu tư.</p></footer>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

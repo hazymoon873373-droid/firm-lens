@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "verifiedAt": "2026-11-09T01:44:43.234Z",
+  "error": "Inference failed: {\"code\":\"MISSING_CITATION\",\"message\":\"Mô hình trả về nội dung chưa có nhãn nguồn hợp lệ ([Trang PDF ...]) thuộc ngữ cảnh đã truy xuất. Đã từ chối hiển thị câu trả lời chưa kiểm chứng.\"}\n+ actual - expected\n\n+ {\n+   code: 'MISSING_CITATION',\n+   message: 'Mô hình trả về nội dung chưa có nhãn nguồn hợp lệ ([Trang PDF ...]) thuộc ngữ cảnh đã truy xuất. Đã từ chối hiển thị câu trả lời chưa kiểm chứng.'\n+ }\n- null\n",
+  "state": {
+    "modelLoaded": true,
+    "active": false,
+    "task": null,
+    "error": {
+      "code": "MISSING_CITATION",
+      "message": "Mô hình trả về nội dung chưa có nhãn nguồn hợp lệ ([Trang PDF ...]) thuộc ngữ cảnh đã truy xuất. Đã từ chối hiển thị câu trả lời chưa kiểm chứng."
+    },
+    "progress": {
+      "total": 255,
+      "cache": 0,
+      "processed": 255,
+      "time_ms": 184085,
+      "elapsedMs": 185155
+    },
+    "tokens": 44,
+    "visibility": "visible"
+  }
+}

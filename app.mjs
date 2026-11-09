@@ -3,6 +3,7 @@ import { companies, metrics, documents, ratio, change, toCsv } from './data.mjs'
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const number = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 1 });
+const preciseRatio = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
 const integer = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
 const views = new Set(['tong-quan', 'du-lieu', 'phuong-phap', 'de-xuat']);
 let ticker = 'VNM';
@@ -42,9 +43,15 @@ function renderCompany() {
   $$('[data-company]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.company === ticker)));
   $('#data-company').value = ticker;
   $('#company-name').textContent = company.name;
+  $('#company-monogram').textContent = company.ticker;
   $('#company-meta').textContent = `${company.ticker} / ${company.sector} / ${company.scope} / ${company.standard}`;
   $('#version-note').textContent = company.sourceNote;
   $('#version-note').classList.toggle('attention', company.provisional);
+  const aiSampleLink = $('#open-ai-sample');
+  if (aiSampleLink) {
+    aiSampleLink.href = `./experiments/browser-ai/index.html?sample=${encodeURIComponent(ticker)}`;
+    aiSampleLink.textContent = `Đối chiếu ${company.ticker} bằng AI cục bộ`;
+  }
   const debt = ratio(current.liabilities, current.assets);
   const previousDebt = ratio(previous.liabilities, previous.assets);
   const items = [
@@ -54,10 +61,18 @@ function renderCompany() {
     ['Dòng tiền kinh doanh', current.cashflow === null ? null : current.cashflow / 1000, 'tỷ VND', change(current.cashflow, previous.cashflow)]
   ];
   $('#metrics').innerHTML = items.map(([label, value, unit, delta, suffix]) => `<article class="metric"><h3>${label}</h3><p class="metric-value">${value === null ? 'Chưa có' : number.format(value)} <span class="metric-unit">${value === null ? '' : unit}</span></p><span class="metric-change">${movement(delta, suffix)}</span></article>`).join('');
-  $('#insight-list').innerHTML = company.observations.map(observation => `<article class="insight"><h3>${observation.title}</h3><p>${observation.text}</p><button type="button" class="source-button" data-source="${observation.metric}">Xem bằng chứng</button></article>`).join('');
+  $('#insight-list').innerHTML = company.observations.map((observation, index) => `<article class="insight"><span class="insight-index" aria-hidden="true">0${index + 1}</span><div><span class="insight-kind">${observation.kind}</span><h3>${observation.title}</h3><p>${observation.text}</p><button type="button" class="source-button" data-source="${observation.metric}">Xem bằng chứng</button></div></article>`).join('');
   $('#table-note').textContent = `${company.version}. ${company.sourceNote}`;
   $('#data-caption').textContent = `${company.name}, số liệu ${company.scope.toLowerCase()}, đơn vị triệu VND. ${company.provisional ? 'Dữ liệu gốc làm tròn đến tỷ đồng.' : 'Cơ sở IFRS.'}`;
   $('#data-rows').innerHTML = metrics.map(([key, label]) => `<tr><th scope="row">${label}</th>${[2024, 2025].map(year => `<td class="number${company.years[year][key] === null ? ' missing' : ''}">${company.years[year][key] === null ? 'Chưa nhập' : integer.format(company.years[year][key])}</td>`).join('')}<td>${company.locators[key] ? `<button type="button" class="source-button" data-source="${key}">Xem nguồn</button>` : 'Chưa nhập nguồn'}</td></tr>`).join('');
+  const currentRatio = ratio(current.currentAssets, current.currentLiabilities);
+  const cashCoverage = ratio(current.cashflow, current.profit);
+  const lenses = [
+    ['Biên lợi nhuận ròng', ratio(current.profit, current.revenue), '%', 'Lợi nhuận / doanh thu. Phản ánh phần lợi nhuận giữ lại trên mỗi đồng doanh thu.', 'profit'],
+    ['Thanh toán hiện hành', currentRatio === null ? null : currentRatio / 100, 'lần', 'Tài sản ngắn hạn / nợ ngắn hạn. Cần đọc thêm cơ cấu tài sản và kỳ hạn nợ.', 'currentAssets'],
+    ['Dòng tiền / lợi nhuận', cashCoverage === null ? null : cashCoverage / 100, 'lần', 'Dòng tiền kinh doanh / lợi nhuận. Đọc cùng thay đổi vốn lưu động và khoản phi tiền tệ.', 'cashflow']
+  ];
+  $('#financial-ratios').innerHTML = lenses.map(([label, value, unit, explanation, source]) => `<article class="ratio-item"><h3>${label}</h3><p class="ratio-value">${value === null ? 'Chưa có dữ liệu' : (unit === 'lần' ? preciseRatio : number).format(value)}${value === null ? '' : ` <span>${unit}</span>`}</p><p>${explanation}</p>${value === null ? '<span class="ratio-missing">Chưa nhập đủ chỉ tiêu đầu vào</span>' : `<button type="button" class="source-button" data-source="${source}">Đối chiếu số liệu gốc</button>`}</article>`).join('');
   renderChart();
 }
 

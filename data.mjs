@@ -49,6 +49,9 @@ export const metrics = [
   ['inventory', 'Hàng tồn kho']
 ];
 export const documents = [
+  { title: 'Explainable artificial intelligence (XAI) in finance: a systematic literature review', type: 'Artificial Intelligence Review, 2024', content: 'Cơ sở phân biệt giải thích mô hình và câu trả lời LLM. Có ghi chú phạm vi đọc và đối chiếu Q1 trong hồ sơ khoa học.', url: 'https://doi.org/10.1007/s10462-024-10854-8', status: 'Toàn văn mở' },
+  { title: 'Exploring small-scale optimization coupling learning approaches for enterprises’ financial health forecasts', type: 'Financial Innovation, 2025', content: 'Dữ liệu doanh nghiệp Trung Quốc, nhãn ST/*ST và nhiều niên độ. Không phải kiểm định mô hình biên lợi nhuận của FirmLens.', url: 'https://doi.org/10.1186/s40854-024-00748-7', status: 'Toàn văn mở' },
+  { title: 'Machine learning techniques in bankruptcy prediction: A systematic literature review', type: 'Expert Systems with Applications, 2024', content: 'Tổng quan phương pháp dự báo phá sản. Lần rà soát hiện mới đọc được abstract; không dùng để công bố độ chính xác của sản phẩm.', url: 'https://doi.org/10.1016/j.eswa.2024.124761', status: 'Đã đọc abstract' },
   { title: 'Báo cáo thường niên Vinamilk 2025', type: 'Báo cáo doanh nghiệp', content: 'Số liệu IFRS hợp nhất 2024, 2025; thông tin quản trị rủi ro.', url: companies.VNM.sourceUrl, status: 'Có số liệu mẫu' },
   { title: 'Báo cáo thường niên Đức Giang 2025', type: 'Bản trích xuất OCR', content: 'Bản tháng 4/2026; số liệu công ty lập, cần đối chiếu bản cập nhật kiểm toán.', url: companies.DGC.updatedUrl, status: 'Bản lịch sử' },
   { title: 'Measuring firm-level supply chain risk using a generative large language model', type: 'Finance Research Letters, 2025', content: 'Tham khảo cách nhận diện rủi ro trong văn bản; dữ liệu hỏi đáp doanh nghiệp Trung Quốc.', url: 'https://doi.org/10.1016/j.frl.2025.107111', status: 'Cơ sở phương pháp' },

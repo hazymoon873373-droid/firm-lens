@@ -15,50 +15,56 @@
   <header class="site-header">
     <div class="container header-row">
       <a class="brand" href="#tong-quan" aria-label="FirmLens, trang tổng quan"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5 22V6h18M5 14h13M12 22v-8M21 22V11"/></svg>FirmLens</a>
-      <span class="header-description">Hiểu sức khỏe doanh nghiệp</span>
+      <span class="header-description">Bàn phân tích doanh nghiệp</span>
       <a class="text-link header-source" href="https://github.com/hazymoon873373-droid/firm-lens" target="_blank" rel="noopener noreferrer">Mã nguồn GitHub</a>
     </div>
     <nav class="container nav-row" aria-label="Điều hướng chính">
-      <a href="#tong-quan" data-view="tong-quan" aria-current="page">Khám phá bản mẫu</a>
+      <a href="#tong-quan" data-view="tong-quan" aria-current="page">Tổng quan tài chính</a>
       <a href="#du-lieu" data-view="du-lieu">Dữ liệu & nguồn</a>
       <a href="#phuong-phap" data-view="phuong-phap">Cách hoạt động</a>
       <a href="#de-xuat" data-view="de-xuat">Đề xuất dự thi</a>
+      <a href="./experiments/browser-ai/index.html" id="nav-ai-link">Không gian AI <span class="nav-tag">Thử nghiệm</span></a>
     </nav>
   </header>
 
   <main id="main" class="container" tabindex="-1">
     <section id="tong-quan" class="view">
       <div class="intro">
-        <div><h1>Đọc báo cáo.<br>Hiểu doanh nghiệp.</h1><p>Kết nối số liệu tài chính với những rủi ro phía sau.</p></div>
-        <div class="intro-aside"><p>Một ý tưởng ứng dụng AI trong kinh tế.</p><p>Khám phá dữ liệu thật, nhận xét có nguồn và hướng phát triển.</p><a class="text-link" href="#phuong-phap">Tìm hiểu phương pháp</a></div>
+        <div class="intro-copy"><h1>Đọc sâu con số.<br>Nhìn rõ doanh nghiệp.</h1><p>Một bàn làm việc cho số liệu, bối cảnh và bằng chứng.</p><a class="intro-action" href="#du-lieu">Khám phá dữ liệu nguồn <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a></div>
+        <aside class="intro-aside" aria-label="Phạm vi dữ liệu"><div class="report-heading"><svg viewBox="0 0 40 48" aria-hidden="true"><path d="M7 2h18l9 9v35H7zM25 2v10h9M13 22h15M13 29h15M13 36h9"/></svg><span>Bộ báo cáo được chọn lọc</span><span class="report-year">2025</span></div><div class="report-stats"><div><strong>02</strong><span>Doanh nghiệp mẫu</span></div><div><strong>2024 / 25</strong><span>Hai kỳ báo cáo</span></div></div><p>Vinamilk / Hóa chất Đức Giang</p><a class="text-link" href="./experiments/browser-ai/index.html" id="intro-ai-link">Mở không gian đọc tài liệu AI</a></aside>
       </div>
-      <p class="notice">Bản mẫu ý tưởng. Số liệu được nhập và đối chiếu thủ công; nhận xét biên soạn sẵn. Chưa có AI phân tích trực tiếp hoặc mô hình dự báo.</p>
+      <details class="scope-note"><summary><span class="scope-label">Về bản mẫu</span> Dữ liệu có nguồn, nhận xét biên soạn sẵn và AI cục bộ tùy chọn</summary><p class="notice">Sổ cái minh họa: số liệu hai doanh nghiệp được nhập và đối chiếu thủ công; nhận xét biên soạn sẵn. Đã có không gian thử nghiệm đọc PDF &amp; hỏi đáp Qwen2.5-1.5B cục bộ trên trình duyệt (tùy chọn, không tự tải mô hình); chưa có tập dữ liệu thật hay mô hình dự báo được kiểm định.</p></details>
 
       <div class="workspace-toolbar">
         <div class="company-switch" role="group" aria-label="Chọn doanh nghiệp mẫu">
           <button type="button" class="company-choice" data-company="VNM" aria-pressed="true"><span class="ticker">VNM</span><span>Vinamilk</span></button>
           <button type="button" class="company-choice" data-company="DGC" aria-pressed="false"><span class="ticker">DGC</span><span>Đức Giang</span></button>
         </div>
-        <button type="button" class="button button-quiet export-csv">Tải dữ liệu CSV</button>
+        <div class="toolbar-actions">
+          <a class="button" id="open-ai-sample" href="./experiments/browser-ai/index.html?sample=VNM">Đối chiếu bằng AI cục bộ</a>
+          <button type="button" class="button button-quiet export-csv">Tải dữ liệu CSV</button>
+        </div>
       </div>
 
-      <div class="company-heading"><div><h2 id="company-name">Vinamilk</h2><p id="company-meta">Đang nạp dữ liệu mẫu…</p></div><span class="period">2024 / 2025</span></div>
+      <div class="company-heading"><div class="company-identity"><span class="company-monogram" id="company-monogram" aria-hidden="true">VNM</span><div><h2 id="company-name">Vinamilk</h2><p id="company-meta">Đang nạp dữ liệu mẫu…</p></div></div><span class="period"><span>Kỳ phân tích</span><strong>2025</strong><span>Đối chiếu 2024</span></span></div>
       <p id="version-note" class="version-note"></p>
       <div id="metrics" class="metric-grid" aria-label="Chỉ tiêu tài chính năm 2025"></div>
 
       <div class="analysis-grid">
         <section class="chart-section" aria-labelledby="chart-title">
-          <div class="section-heading"><h2 id="chart-title">Hai năm, một góc nhìn</h2><span>Tỷ VND</span></div>
+          <div class="section-heading"><h2 id="chart-title">Kết quả qua hai kỳ</h2><span>Đơn vị: tỷ VND</span></div>
           <div class="chart-controls" role="group" aria-label="Chọn chỉ tiêu biểu đồ">
             <button type="button" data-chart="revenue" aria-pressed="true">Doanh thu</button>
             <button type="button" data-chart="profit" aria-pressed="false">Lợi nhuận</button>
             <button type="button" data-chart="cashflow" aria-pressed="false">Dòng tiền</button>
           </div>
           <div id="chart" class="chart" aria-live="polite"></div>
-          <p class="caption">Chỉ hai mốc báo cáo thực tế. Biểu đồ không phải dự báo.</p>
+          <div class="chart-legend"><span><i class="legend-before" aria-hidden="true"></i>2024</span><span><i class="legend-after" aria-hidden="true"></i>2025</span></div><p class="caption">Trục bắt đầu từ 0. Hai kỳ thực tế, không phải dự báo.</p>
         </section>
-        <section class="insights" aria-labelledby="insight-title"><div class="section-heading"><h2 id="insight-title">Tín hiệu & bằng chứng</h2></div><div id="insight-list"></div></section>
+        <section class="insights" aria-labelledby="insight-title"><div class="section-heading"><h2 id="insight-title">Tín hiệu & bằng chứng</h2></div><p class="section-description">Nhận xét biên soạn từ dữ liệu mẫu.</p><div id="insight-list"></div></section>
       </div>
+      <section class="financial-lenses" aria-labelledby="lenses-title"><div class="lenses-heading"><h2 id="lenses-title">Đọc sâu cấu trúc tài chính</h2><p>Tính trực tiếp từ bộ số liệu. Không chấm điểm hay xếp hạng khác ngành.</p></div><div id="financial-ratios" class="ratio-grid"></div></section>
+      <p class="project-resources"><a href="./competition-readiness.md" download>Hồ sơ sẵn sàng dự thi</a><a href="./co-so-khoa-hoc.md" download>Cơ sở khoa học &amp; đối chiếu Q1</a><a href="./toolkit-sources.md" download>Thư viện công cụ &amp; nguồn tham khảo</a></p>
       <div class="closing-row"><p>Mỗi nhận định cần một bằng chứng.<br>Mỗi con số cần đúng ngữ cảnh.</p><a class="button" href="#du-lieu">Kiểm tra dữ liệu nguồn</a></div>
     </section>
 
@@ -77,15 +83,15 @@
       <ol class="method-list">
         <li><h2>Đọc đúng dữ liệu</h2><p>Trích bảng và văn bản từ báo cáo. Lưu mã doanh nghiệp, kỳ, ngày công bố, trang và phiên bản. Kiểm tra OCR với bản gốc.</p><span>Đầu vào: báo cáo tài chính, thuyết minh, kiểm toán, thường niên.</span></li>
         <li><h2>Kết nối con số và bối cảnh</h2><p>Tính chỉ tiêu bằng công thức cố định. AI dự kiến nhận diện rủi ro về thị trường, chuỗi cung ứng và quản trị từ văn bản.</p><span>Thiếu dữ liệu được giữ là thiếu, không thay bằng số 0.</span></li>
-        <li><h2>Giải thích có bằng chứng</h2><p>Hiển thị dấu hiệu cần xem xét, số liệu liên quan và vị trí trong tài liệu. Phân biệt rủi ro được đề cập với thiệt hại đã xảy ra.</p><span>Bản mẫu hiện dùng nhận xét đã biên soạn, chưa gọi mô hình AI.</span></li>
-        <li><h2>Kiểm chứng trên kỳ tương lai</h2><p>Thử dự báo biên lợi nhuận hoạt động bốn quý tiếp theo. So sánh mô hình chỉ dùng số liệu với mô hình bổ sung thông tin văn bản.</p><span>Chỉ sử dụng thông tin đã công khai tại thời điểm dự báo.</span></li>
+        <li><h2>Giải thích có bằng chứng</h2><p>Hiển thị dấu hiệu cần xem xét, số liệu liên quan và vị trí trong tài liệu. Phân biệt rủi ro được đề cập với thiệt hại đã xảy ra.</p><span>Sổ cái chính dùng nhận xét đã biên soạn; không gian AI thử nghiệm chỉ trả lời khi trích dẫn được trang nguồn hợp lệ.</span></li>
+        <li><h2>Kiểm chứng trên kỳ tương lai</h2><p>Đã có pipeline nghiên cứu biên lợi nhuận ròng năm tài chính kế tiếp với mô hình cơ sở persistence và Ridge. Chưa có dữ liệu huấn luyện thật hoặc mô hình dự báo được kiểm định.</p><span>Chỉ sử dụng thông tin đã công khai tại thời điểm dự báo.</span></li>
       </ol>
       <div class="method-bottom"><section><h2>Bốn góc nhìn tài chính</h2><dl class="dimensions"><div><dt>Khả năng sinh lời</dt><dd>Biên lợi nhuận và sự thay đổi qua kỳ.</dd></div><div><dt>Thanh khoản</dt><dd>Tài sản ngắn hạn và nghĩa vụ ngắn hạn.</dd></div><div><dt>Đòn bẩy</dt><dd>Nợ phải trả, nợ vay và vốn chủ sở hữu.</dd></div><div><dt>Chất lượng dòng tiền</dt><dd>Dòng tiền kinh doanh so với lợi nhuận.</dd></div></dl></section><section><h2>Đo giá trị thực tế</h2><p>Kiểm tra độ chính xác trích xuất, lỗi bỏ sót và thời gian đọc báo cáo. Kiểm định dự báo theo thời gian, không chia ngẫu nhiên các trang của cùng báo cáo.</p><p>Chưa có thang điểm sức khỏe hoặc xác suất phá sản được hiệu chỉnh. Hai doanh nghiệp khác ngành, khác cơ sở báo cáo không được xếp hạng trực tiếp.</p></section></div>
     </section>
 
     <section id="de-xuat" class="view">
       <div class="page-heading"><h1>Một ý tưởng, có đường thực hiện.</h1><p>Ứng dụng AI vào một bài toán kinh tế có dữ liệu công khai.</p></div>
-      <div class="proposal-grid"><section class="proposal-copy"><h2>Vấn đề nhóm muốn giải quyết</h2><p>Người đọc phải tổng hợp nhiều trang báo cáo, kiểm tra số liệu qua các kỳ và tìm rủi ro nằm trong văn bản. Một chỉ tiêu tài chính riêng lẻ khó phản ánh toàn bộ bối cảnh doanh nghiệp.</p><h2>Giải pháp đề xuất</h2><p>FirmLens kết hợp dữ liệu tài chính với thông tin định tính để hỗ trợ nhà đầu tư cá nhân sàng lọc doanh nghiệp, nhận diện dấu hiệu cần xem xét và truy ngược bằng chứng.</p><h2>Phạm vi ban đầu</h2><p>Thử nghiệm trên doanh nghiệp niêm yết trong một ngành. Thu thập báo cáo nhiều năm, chuẩn hóa dữ liệu, kiểm tra độ chính xác và đo thời gian phân tích. Chỉ mở rộng dự báo sau khi đủ dữ liệu kiểm chứng.</p><a class="button" href="./de-xuat.md" download>Tải mô tả đề xuất</a></section><aside class="roadmap"><h2>Lộ trình dự kiến</h2><ol><li><strong>Hiện tại</strong><span>Bản mẫu giao diện, hai doanh nghiệp và nguồn dữ liệu có thể kiểm tra.</span></li><li><strong>Thử nghiệm dữ liệu</strong><span>Chọn một ngành, bổ sung lịch sử nhiều năm và nhãn kết quả kỳ sau.</span></li><li><strong>Tích hợp AI</strong><span>Trích xuất rủi ro, đối chiếu với đánh giá của người đọc.</span></li><li><strong>Kiểm định</strong><span>So sánh với phương pháp cơ sở và đo giá trị tăng thêm.</span></li></ol><p class="caption">Đây là lộ trình đề xuất, chưa phải các chức năng đã hoàn thành.</p></aside></div>
+      <div class="proposal-grid"><section class="proposal-copy"><h2>Vấn đề nhóm muốn giải quyết</h2><p>Người đọc phải tổng hợp nhiều trang báo cáo, kiểm tra số liệu qua các kỳ và tìm rủi ro nằm trong văn bản. Một chỉ tiêu tài chính riêng lẻ khó phản ánh toàn bộ bối cảnh doanh nghiệp.</p><h2>Giải pháp đề xuất</h2><p>FirmLens kết hợp dữ liệu tài chính với thông tin định tính để hỗ trợ nhà đầu tư cá nhân sàng lọc doanh nghiệp, nhận diện dấu hiệu cần xem xét và truy ngược bằng chứng.</p><h2>Phạm vi ban đầu</h2><p>Thử nghiệm trên doanh nghiệp niêm yết trong một ngành. Thu thập báo cáo nhiều năm, chuẩn hóa dữ liệu, kiểm tra độ chính xác và đo thời gian phân tích. Chỉ mở rộng dự báo sau khi đủ dữ liệu kiểm chứng.</p><a class="button" href="./de-xuat.md" download>Tải mô tả đề xuất</a></section><aside class="roadmap"><h2>Lộ trình dự kiến</h2><ol><li><strong>Hiện tại</strong><span>Sổ cái hai doanh nghiệp có nguồn, không gian đọc PDF / hỏi đáp Qwen cục bộ và pipeline nghiên cứu persistence / Ridge. Chưa có mô hình dự báo được kiểm định.</span></li><li><strong>Thử nghiệm dữ liệu</strong><span>Chọn một ngành chuẩn VAS, bổ sung lịch sử nhiều năm và nhãn biên lợi nhuận ròng năm tài chính kế tiếp.</span></li><li><strong>Tích hợp AI</strong><span>Trích xuất rủi ro, đối chiếu với đánh giá của người đọc.</span></li><li><strong>Kiểm định</strong><span>So sánh với phương pháp cơ sở và đo giá trị tăng thêm.</span></li></ol><p class="caption">Đây là lộ trình đề xuất, chưa phải các chức năng đã hoàn thành.</p></aside></div>
     </section>
     <noscript><p class="notice">Bật JavaScript để chuyển doanh nghiệp, xem biểu đồ và tải CSV. Số liệu Vinamilk IFRS 2025: doanh thu 54.248.830 triệu VND; lợi nhuận thuần 8.505.216 triệu VND. Nguồn: báo cáo thường niên, trang in 216.</p></noscript>
   </main>

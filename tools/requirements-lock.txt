@@ -1,0 +1,6 @@
+# Observed local Python 3.13 environment, 2026-11-09; research only.
+joblib==1.6.0
+numpy==2.5.4
+scikit-learn==1.7.2
+scipy==1.18.1
+threadpoolctl==3.8.0

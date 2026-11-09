@@ -1,0 +1,20 @@
+{
+  "ok": false,
+  "verifiedAt": "2026-11-09T01:51:01.247Z",
+  "error": "Expected answer to contain IFRS 2025 consolidated revenue (54.248.830) figure (54248830), got: \"[Trang PDF 109]: Doanh thu và lợi nhuận thuần năm 2025 theo báo cáo kết quả hoạt động kinh doanh hợp nhất IFRS là 8.505.216 và 15.542.110 triệu đồng.\"",
+  "state": {
+    "modelLoaded": true,
+    "active": false,
+    "task": null,
+    "error": null,
+    "progress": {
+      "total": 236,
+      "cache": 0,
+      "processed": 236,
+      "time_ms": 41135,
+      "elapsedMs": 41430
+    },
+    "tokens": 66,
+    "visibility": "visible"
+  }
+}

@@ -1,0 +1,2 @@
+# Local research environment only; never imported by the browser.
+scikit-learn==1.7.2

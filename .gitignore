@@ -5,3 +5,9 @@ node_modules/
 .hallmark/captures/
 .hallmark/*.png
 .hallmark/*.html
+dist/
+*.gguf
+.cache/
+.venv/
+__pycache__/
+*.pyc

@@ -1,0 +1,23 @@
+{
+  "version": "vas-ridge-v1",
+  "active": false,
+  "status": "insufficient_verified_data",
+  "model": null,
+  "observation_count": 0,
+  "company_count": 0,
+  "counts": {
+    "train": 0,
+    "validation": 0,
+    "test": 0
+  },
+  "exclusions": [],
+  "evaluation": null,
+  "required_minimum": {
+    "train": 50,
+    "validation": 5,
+    "test": 20,
+    "test_companies": 5
+  },
+  "reason": "Need at least 50 train, 5 validation and 20 test pairs from at least 5 test companies after temporal checks.",
+  "dataset_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+}
