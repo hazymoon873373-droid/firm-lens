@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "verifiedAt": "2026-11-09T02:09:38.976Z",
+  "url": "https://hazymoon873373-droid.github.io/firm-lens/",
+  "releaseCommit": "c1cab4064dfc23c0c11942f70d78322cdfc21cc7",
+  "fonts": [
+    "loaded",
+    "loaded",
+    "loaded"
+  ],
+  "rootAndAi": true,
+  "ledgerCompanyAndMissingValues": true,
+  "sourceDocuments": 7,
+  "mobileWidth": 375,
+  "automaticModelRequests": 0,
+  "reports": [
+    "competition-readiness.md",
+    "toolkit-sources.md",
+    "co-so-khoa-hoc.md",
+    "repo-remediation-01.md",
+    "ai-verification-evidence.json"
+  ],
+  "errors": [],
+  "failed": []
+}
